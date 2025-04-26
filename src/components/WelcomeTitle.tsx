@@ -2,9 +2,13 @@ import { FaSearch } from "react-icons/fa";
 import Category from "./Category";
 import axios from "axios";
 import { Server } from "./Global";
-import { useState } from "react";
+import React, { useState } from "react";
 
-const WelcomeTitle = () => {
+interface WelcomeTitleProps {
+  onCategorySelect: (category: string) => void;
+}
+
+const WelcomeTitle = ({ onCategorySelect }: WelcomeTitleProps) => {
   const [categories, setCategoies] = useState<string[]>([]);
   const [showCategory, setShowCategory] = useState<boolean>(false);
   const [inputValue, setInputValue] = useState<string>("");
@@ -22,15 +26,25 @@ const WelcomeTitle = () => {
     }
   };
 
-  const handleCategoryClick = (event: any) => {
-    setInputValue(event.target.textContent);
+  const handleCategoryClick = (event: React.MouseEvent<HTMLLIElement>) => {
+    const selected = event.currentTarget.textContent ?? "";
+    setInputValue(selected);
+    // onCategorySelect(selected);
+    setShowCategory(false);
+  };
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (inputValue) {
+      onCategorySelect(inputValue);
+    }
   };
 
   return (
     <div className="welcome_title">
       <header className="welcome_heading">輕鬆享受台北一日悠閒</header>
       <p className="welcome_subtext">探索每個角落，體驗城市的深度旅遊行程</p>
-      <form className="welcome_category_form">
+      <form className="welcome_category_form" onSubmit={handleSubmit}>
         <input
           className="welcome_category_input"
           autoFocus
@@ -43,11 +57,7 @@ const WelcomeTitle = () => {
           }}
           onChange={(e) => setInputValue(e.target.value)}
         />
-        <button
-          className="welcome_category_button"
-          type="submit"
-          onClick={() => {}}
-        >
+        <button className="welcome_category_button" type="submit">
           <FaSearch />
         </button>
       </form>

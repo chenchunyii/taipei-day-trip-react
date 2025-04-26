@@ -4,38 +4,61 @@ import { Attraction } from "../interfaces/attraction";
 import { Server } from "./Global";
 import Footer from "./Footer";
 
-const Promotion = () => {
-  const [attractions, setAttraction] = useState<Attraction[]>([]);
+interface PromotionProps {
+  selectedCategory: string;
+}
+
+const Promotion = ({ selectedCategory }: PromotionProps) => {
+  const [attractions, setAttractions] = useState<Attraction[]>([]);
   const nextPageRef = useRef<number>(1);
   const isLoadingRef = useRef<boolean>(false);
   const [hasMore, setHasMore] = useState<boolean>(true);
   const footerRef = useRef<HTMLDivElement>(null);
 
-  const fetchAttractions = async () => {
+  useEffect(() => {
+    const loadFirstPage = async () => {
+      isLoadingRef.current = true;
+      try {
+        nextPageRef.current = 1;
+        setHasMore(true);
+        const response = await axios.get<Attraction[]>(
+          `${Server}/attractions?page=${nextPageRef.current}&category=${selectedCategory}`
+        );
+        setAttractions(response.data);
+        nextPageRef.current += 1;
+      } catch (error) {
+        console.error("Error fetching first page:", error);
+      } finally {
+        isLoadingRef.current = false;
+      }
+    };
+
+    if (selectedCategory) {
+      loadFirstPage();
+    }
+  }, [selectedCategory]);
+
+  const fetchMoreAttractions = async () => {
     if (isLoadingRef.current || !hasMore) return;
     isLoadingRef.current = true;
 
     try {
       const response = await axios.get<Attraction[]>(
-        `${Server}/attractions?page=${nextPageRef.current}`
+        `${Server}/attractions?page=${nextPageRef.current}&category=${selectedCategory}`
       );
 
       if (response.data.length === 0) {
         setHasMore(false);
       } else {
-        setAttraction((prev) => [...prev, ...response.data]);
+        setAttractions((prev) => [...prev, ...response.data]);
         nextPageRef.current += 1;
       }
     } catch (error) {
-      console.error("Error fetching attractions:", error);
+      console.error("Error fetching more attractions:", error);
     } finally {
       isLoadingRef.current = false;
     }
   };
-
-  useEffect(() => {
-    fetchAttractions();
-  }, []);
 
   useEffect(() => {
     const options = {
@@ -46,7 +69,7 @@ const Promotion = () => {
 
     const observer = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting && hasMore && !isLoadingRef.current) {
-        fetchAttractions();
+        fetchMoreAttractions();
       }
     }, options);
 
@@ -59,7 +82,7 @@ const Promotion = () => {
         observer.unobserve(footerRef.current);
       }
     };
-  }, [hasMore]);
+  }, [hasMore, selectedCategory]);
 
   return (
     <>
