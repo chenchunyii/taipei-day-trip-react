@@ -22,7 +22,13 @@ const Promotion = ({ selectedCategory }: PromotionProps) => {
         nextPageRef.current = 1;
         setHasMore(true);
         const response = await axios.get<Attraction[]>(
-          `${Server}/attractions?page=${nextPageRef.current}&category=${selectedCategory}`
+          `${Server}/attractions`,
+          {
+            params: {
+              page: nextPageRef.current,
+              keyword: selectedCategory,
+            },
+          }
         );
         setAttractions(response.data);
         nextPageRef.current += 1;
@@ -43,9 +49,12 @@ const Promotion = ({ selectedCategory }: PromotionProps) => {
     isLoadingRef.current = true;
 
     try {
-      const response = await axios.get<Attraction[]>(
-        `${Server}/attractions?page=${nextPageRef.current}&category=${selectedCategory}`
-      );
+      const response = await axios.get<Attraction[]>(`${Server}/attractions`, {
+        params: {
+          page: nextPageRef.current,
+          keyword: selectedCategory,
+        },
+      });
 
       if (response.data.length === 0) {
         setHasMore(false);
