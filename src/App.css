@@ -56,7 +56,6 @@ body {
   left: 50%;
   transform: translate(-50%);
   text-align: left;
-  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
@@ -68,7 +67,6 @@ body {
 }
 .welcome_category_form {
   width: 100%;
-  display: flex;
   align-items: center;
 }
 .welcome_category_input {
@@ -88,7 +86,6 @@ body {
   border: 1px solid #448899;
   overflow: hidden;
   cursor: pointer;
-  display: flex;
   justify-content: center;
   align-items: center;
 }

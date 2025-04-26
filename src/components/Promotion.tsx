@@ -21,6 +21,7 @@ const Promotion = ({ selectedCategory }: PromotionProps) => {
       try {
         nextPageRef.current = 1;
         setHasMore(true);
+        setAttractions([]);
         const response = await axios.get<Attraction[]>(
           `${Server}/attractions`,
           {
@@ -82,13 +83,14 @@ const Promotion = ({ selectedCategory }: PromotionProps) => {
       }
     }, options);
 
-    if (footerRef.current) {
-      observer.observe(footerRef.current);
+    const currentFooter = footerRef.current;
+    if (currentFooter) {
+      observer.observe(currentFooter);
     }
 
     return () => {
-      if (footerRef.current) {
-        observer.unobserve(footerRef.current);
+      if (currentFooter) {
+        observer.unobserve(currentFooter);
       }
     };
   }, [hasMore, selectedCategory]);

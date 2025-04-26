@@ -29,7 +29,7 @@ const WelcomeTitle = ({ onCategorySelect }: WelcomeTitleProps) => {
   const handleCategoryClick = (event: React.MouseEvent<HTMLLIElement>) => {
     const selected = event.currentTarget.textContent ?? "";
     setInputValue(selected);
-    // onCategorySelect(selected);
+    onCategorySelect(selected);
     setShowCategory(false);
   };
 
@@ -41,10 +41,13 @@ const WelcomeTitle = ({ onCategorySelect }: WelcomeTitleProps) => {
   };
 
   return (
-    <div className="welcome_title">
+    <div className="welcome_title display_flex">
       <header className="welcome_heading">輕鬆享受台北一日悠閒</header>
       <p className="welcome_subtext">探索每個角落，體驗城市的深度旅遊行程</p>
-      <form className="welcome_category_form" onSubmit={handleSubmit}>
+      <form
+        className="welcome_category_form display_flex"
+        onSubmit={handleSubmit}
+      >
         <input
           className="welcome_category_input"
           autoFocus
@@ -57,7 +60,7 @@ const WelcomeTitle = ({ onCategorySelect }: WelcomeTitleProps) => {
           }}
           onChange={(e) => setInputValue(e.target.value)}
         />
-        <button className="welcome_category_button" type="submit">
+        <button className="welcome_category_button display_flex" type="submit">
           <FaSearch />
         </button>
       </form>
