@@ -186,3 +186,14 @@ body {
 .display_flex {
   display: flex;
 }
+
+@media (max-width: 1200px) {
+  .promotion {
+    max-width: 95%;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 750px) {
+}
+@media (max-width: 600px) {
+}
