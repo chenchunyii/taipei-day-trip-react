@@ -1,7 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { Attraction } from "../interfaces/attraction";
-import { Server } from "./Global";
 import Footer from "./Footer";
 
 interface PromotionProps {
@@ -14,6 +13,7 @@ const Promotion = ({ selectedCategory }: PromotionProps) => {
   const isLoadingRef = useRef<boolean>(false);
   const [hasMore, setHasMore] = useState<boolean>(true);
   const footerRef = useRef<HTMLDivElement>(null);
+  const Server = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     const loadFirstPage = async () => {
