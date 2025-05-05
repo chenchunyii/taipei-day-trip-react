@@ -51,7 +51,8 @@ body {
 }
 .welcome_title {
   position: absolute;
-  width: 1280px;
+  max-width: 1200px;
+  width: 95%;
   height: 100%;
   left: 50%;
   transform: translate(-50%);
@@ -60,7 +61,6 @@ body {
   justify-content: center;
   align-items: flex-start;
   color: #fff;
-  margin-left: 20px;
 }
 .welcome_heading {
   font-size: 28px;
@@ -72,7 +72,7 @@ body {
 .welcome_category_input {
   font-size: 17px;
   padding: 10px;
-  width: 30%;
+  width: 330px;
   cursor: pointer;
   border-width: 1px;
   border-style: solid;
@@ -99,6 +99,7 @@ body {
   background-color: #fff;
   top: 70%;
   width: 30%;
+  min-width: 370px;
   padding: 10px;
   border-radius: 5px;
   display: grid;
@@ -187,6 +188,12 @@ body {
   display: flex;
 }
 
+@media (max-width: 1300px) {
+  .welcome_img {
+    width: auto;
+    height: 100%;
+  }
+}
 @media (max-width: 1200px) {
   .promotion {
     max-width: 95%;
@@ -194,6 +201,21 @@ body {
   }
 }
 @media (max-width: 750px) {
+  .welcome_category_input {
+    min-width: 300px;
+  }
 }
 @media (max-width: 600px) {
+  .promotion {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+@media (max-width: 475px) {
+  .welcome_category_input {
+    min-width: 80%;
+  }
+  .category {
+    width: 90%;
+    min-width: auto;
+  }
 }
