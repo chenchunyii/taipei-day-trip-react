@@ -1,7 +1,6 @@
 import { FaSearch } from "react-icons/fa";
 import Category from "./Category";
 import axios from "axios";
-import { Server } from "./Global";
 import React, { useState } from "react";
 
 interface WelcomeTitleProps {
@@ -12,6 +11,7 @@ const WelcomeTitle = ({ onCategorySelect }: WelcomeTitleProps) => {
   const [categories, setCategoies] = useState<string[]>([]);
   const [showCategory, setShowCategory] = useState<boolean>(false);
   const [inputValue, setInputValue] = useState<string>("");
+  const Server = import.meta.env.VITE_API_URL;
 
   const fetchCategories = async () => {
     try {

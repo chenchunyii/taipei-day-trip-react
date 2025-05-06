@@ -1,7 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import axios from "axios";
-import { Attraction } from "../interfaces/attraction";
-import { Server } from "./Global";
+import { AttractionInterface } from "../interfaces/attraction";
 import Footer from "./Footer";
 
 interface PromotionProps {
@@ -9,11 +8,12 @@ interface PromotionProps {
 }
 
 const Promotion = ({ selectedCategory }: PromotionProps) => {
-  const [attractions, setAttractions] = useState<Attraction[]>([]);
+  const [attractions, setAttractions] = useState<AttractionInterface[]>([]);
   const nextPageRef = useRef<number>(1);
   const isLoadingRef = useRef<boolean>(false);
   const [hasMore, setHasMore] = useState<boolean>(true);
   const footerRef = useRef<HTMLDivElement>(null);
+  const Server = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     const loadFirstPage = async () => {
@@ -22,7 +22,7 @@ const Promotion = ({ selectedCategory }: PromotionProps) => {
         nextPageRef.current = 1;
         setHasMore(true);
         setAttractions([]);
-        const response = await axios.get<Attraction[]>(
+        const response = await axios.get<AttractionInterface[]>(
           `${Server}/attractions`,
           {
             params: {
@@ -50,12 +50,15 @@ const Promotion = ({ selectedCategory }: PromotionProps) => {
     isLoadingRef.current = true;
 
     try {
-      const response = await axios.get<Attraction[]>(`${Server}/attractions`, {
-        params: {
-          page: nextPageRef.current,
-          keyword: selectedCategory,
-        },
-      });
+      const response = await axios.get<AttractionInterface[]>(
+        `${Server}/attractions`,
+        {
+          params: {
+            page: nextPageRef.current,
+            keyword: selectedCategory,
+          },
+        }
+      );
 
       if (response.data.length === 0) {
         setHasMore(false);
@@ -95,6 +98,10 @@ const Promotion = ({ selectedCategory }: PromotionProps) => {
     };
   }, [hasMore, selectedCategory]);
 
+  const directToAttractionPagebyId = (id: number) => {
+    window.location.href = `/attraction/${id}`;
+  };
+
   return (
     <>
       <div className="promotion">
@@ -108,6 +115,7 @@ const Promotion = ({ selectedCategory }: PromotionProps) => {
                 className="attraction_container_img"
                 src={attraction.images ? attraction.images[0] : ""}
                 alt={attraction.name}
+                onClick={() => directToAttractionPagebyId(attraction.id)}
               />
               <div className="attraction_container_name_bg display_flex">
                 <div className="attraction_container_name_opacity"></div>
