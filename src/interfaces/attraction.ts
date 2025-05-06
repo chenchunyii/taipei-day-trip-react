@@ -1,4 +1,4 @@
-export interface Attraction {
+export interface AttractionInterface {
   id: number;
   name: string;
   category: string;

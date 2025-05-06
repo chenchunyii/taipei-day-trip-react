@@ -13,12 +13,20 @@ body {
 
 .navigator {
   max-width: 1280px;
-  margin: 0 auto;
-  display: flex;
+  position: fixed;
   justify-content: space-between;
   align-items: center;
+  left: 50%;
+  right: 50%;
+  transform: translate(-50%);
   height: 54px;
   width: 100%;
+  background-color: #fff;
+  z-index: 99;
+}
+.nv-bg {
+  width: 100%;
+  height: 54px;
 }
 .navigator_title {
   margin: 15px;
@@ -173,6 +181,123 @@ body {
   margin-right: 10px;
 }
 
+.attraction {
+  max-width: 1200px;
+  width: 95%;
+  height: 406px;
+  margin: 30px auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+}
+.carousel_bg {
+  height: 406px;
+  position: relative;
+  border-radius: 5px;
+  overflow: hidden;
+}
+.carousel_bt {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: white;
+  border-radius: 50%;
+  cursor: pointer;
+  opacity: 0.7;
+}
+.carousel_bt:hover {
+  background-color: black;
+  opacity: 1;
+  transition: all 0.3s ease-in-out;
+}
+.carousel_prev_bt {
+  left: 30px;
+}
+.carousel_next_bt {
+  right: 30px;
+}
+.carousel_img {
+  height: 100%;
+}
+.carousel_index_bg {
+  position: absolute;
+  bottom: 10px;
+  width: 100%;
+}
+.carousel_index {
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: white;
+  opacity: 0.5;
+  padding: 8px;
+  margin: 0 1px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.carousel_index:hover {
+  background-color: black;
+  opacity: 0.8;
+  padding: 10px;
+  transition: all 0.3s ease-in-out;
+}
+.carousel_index.active {
+  background-color: black;
+  opacity: 0.8;
+  padding: 10px;
+}
+.attraction_detail {
+  color: #666666;
+  font-weight: bold;
+  width: 100%;
+  text-align: left;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.booking_info {
+  background-color: #e8e8e8;
+  border-radius: 5px;
+  padding: 10px;
+}
+.half_day {
+  padding: 12px;
+  margin: 0 5px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 1px solid black;
+}
+.half_day.selected {
+  background-color: #448899;
+}
+
+.booking_btn {
+  background-color: #448899;
+  color: #fff;
+  font-weight: normal;
+  font-size: 17px;
+  width: 155px;
+  height: 36px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+}
+.attraction_pg_hr {
+  border: 1px solid #e8e8e8;
+  max-width: 1200px;
+  width: 95%;
+  margin: 40px auto;
+}
+.attraction_intro {
+  max-width: 1200px;
+  width: 95%;
+  text-align: left;
+  color: #666666;
+  margin: 0 auto;
+}
+
 .footer {
   position: absolute;
   bottom: 0;
@@ -182,10 +307,6 @@ body {
   height: 100px;
   justify-content: center;
   align-items: center;
-}
-
-.display_flex {
-  display: flex;
 }
 
 @media (max-width: 1300px) {
@@ -204,6 +325,24 @@ body {
   .welcome_category_input {
     min-width: 300px;
   }
+  .attraction {
+    grid-template-columns: 1fr;
+    height: auto;
+    gap: 0px;
+  }
+  .carousel_bg {
+    width: 100%;
+  }
+  .carousel_img {
+    width: 100%;
+    height: auto;
+  }
+}
+@media (max-width: 670px) {
+  .carousel_img {
+    width: auto;
+    height: 406px;
+  }
 }
 @media (max-width: 600px) {
   .promotion {
@@ -218,4 +357,17 @@ body {
     width: 90%;
     min-width: auto;
   }
+}
+
+a {
+  text-decoration: none;
+}
+
+.display_flex {
+  display: flex;
+}
+.display_flex_center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
