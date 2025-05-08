@@ -10,7 +10,16 @@ body {
   min-height: 100vh;
   padding-bottom: 100px;
 }
-
+.navigator_bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 54px;
+  width: 100%;
+  background-color: #fff;
+  z-index: 99;
+}
 .navigator {
   max-width: 1280px;
   position: fixed;
@@ -22,7 +31,6 @@ body {
   height: 54px;
   width: 100%;
   background-color: #fff;
-  z-index: 99;
 }
 .nv-bg {
   width: 100%;
