@@ -100,21 +100,19 @@ const Attraction = () => {
             <p>
               選擇日期：<input placeholder="yyyy/mm/dd" type="date"></input>
             </p>
-            <p>
-              <div className="display_flex">
-                選擇時間：
-                <button
-                  className={`half_day ${isSelected("A") ? "selected" : ""}`}
-                  onClick={() => handleButtonClick("A")}
-                />
-                <span>上半天</span>
-                <button
-                  className={`half_day ${isSelected("B") ? "selected" : ""}`}
-                  onClick={() => handleButtonClick("B")}
-                />
-                <span>下半天</span>
-              </div>
-            </p>
+            <div className="display_flex">
+              選擇時間：
+              <button
+                className={`half_day ${isSelected("A") ? "selected" : ""}`}
+                onClick={() => handleButtonClick("A")}
+              />
+              <span>上半天</span>
+              <button
+                className={`half_day ${isSelected("B") ? "selected" : ""}`}
+                onClick={() => handleButtonClick("B")}
+              />
+              <span>下半天</span>
+            </div>
             <p>導覽費用：新台幣 ${fee}元</p>
             <form className="booking_form">
               <button className="booking_btn">開始預定行程</button>
