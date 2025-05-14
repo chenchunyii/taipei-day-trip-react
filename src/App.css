@@ -18,7 +18,7 @@ body {
   height: 54px;
   width: 100%;
   background-color: #fff;
-  z-index: 99;
+  z-index: 9;
 }
 .navigator {
   max-width: 1280px;
@@ -378,4 +378,7 @@ a {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.cursor_pointer {
+  cursor: pointer;
 }

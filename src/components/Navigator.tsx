@@ -1,3 +1,5 @@
+import Register from "./Register";
+
 const Navigator = () => {
   return (
     <>
@@ -11,6 +13,7 @@ const Navigator = () => {
             <div className="navigator_singup">登入/註冊</div>
           </div>
         </nav>
+        <Register />
       </div>
       <nav className="nv-bg" />
     </>

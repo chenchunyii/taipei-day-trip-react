@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./App.css";
+import "../style/css/Register.css";
 import Navigator from "./components/Navigator";
 import Promotion from "./components/Promotion";
 import Welcome from "./components/Welcome";
