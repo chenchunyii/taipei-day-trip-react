@@ -1,6 +1,43 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { MemberInterface } from "../interfaces/member";
 import Register from "./Register";
 
 const Navigator = () => {
+  const Server = import.meta.env.VITE_API_MEMBER_URL;
+  const [openRegister, setOpenRegister] = useState(false);
+  const [member, setMember] = useState<MemberInterface | null>(null);
+
+  useEffect(() => {
+    const token = document.cookie.split("=")[1];
+
+    if (!token) return;
+    axios
+      .post(
+        `${Server}/me`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then((res) => {
+        if (res.data) {
+          setMember({
+            Id: res.data.id,
+            Nickname: res.data.nickname,
+            Email: res.data.email,
+          });
+        }
+      })
+      .catch((err) => {
+        console.error("取得會員資料失敗：", err);
+
+        setMember(null);
+      });
+  }, [Server]);
+
   return (
     <>
       <div className="navigator_bg">
@@ -9,11 +46,32 @@ const Navigator = () => {
             台北一日遊
           </a>
           <div className="navigator_links">
-            <div className="navigator_book">預定行程</div>
-            <div className="navigator_singup">登入/註冊</div>
+            <div className="navigator_book cursor_pointer">預定行程</div>
+
+            <div>
+              {member ? (
+                <div>
+                  Hi{" "}
+                  <span className="username cursor_pointer">
+                    {member.Nickname}
+                  </span>
+                  ，歡迎回來
+                </div>
+              ) : (
+                <div
+                  className="navigator_singup cursor_pointer"
+                  onClick={() => setOpenRegister(true)}
+                >
+                  登入/註冊
+                </div>
+              )}
+            </div>
           </div>
         </nav>
-        <Register />
+        <Register
+          openRegister={openRegister}
+          setOpenRegister={setOpenRegister}
+        />
       </div>
       <nav className="nv-bg" />
     </>
