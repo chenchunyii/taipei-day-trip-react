@@ -7,6 +7,7 @@ const Navigator = () => {
   const Server = import.meta.env.VITE_API_MEMBER_URL;
   const [openRegister, setOpenRegister] = useState(false);
   const [member, setMember] = useState<MemberInterface | null>(null);
+  const [showLogout, setShowLogout] = useState(false);
 
   useEffect(() => {
     const token = document.cookie.split("=")[1];
@@ -52,8 +53,15 @@ const Navigator = () => {
               {member ? (
                 <div>
                   Hi{" "}
-                  <span className="username cursor_pointer">
+                  <span
+                    className="username cursor_pointer"
+                    onMouseEnter={() => setShowLogout(true)}
+                    onMouseLeave={() => setShowLogout(false)}
+                  >
                     {member.Nickname}
+                    {showLogout && (
+                      <div className="logout cursor_pointer">登出</div>
+                    )}
                   </span>
                   ，歡迎回來
                 </div>
