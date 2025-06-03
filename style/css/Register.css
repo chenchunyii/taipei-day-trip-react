@@ -1,3 +1,12 @@
+.cover_pg_bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 98;
+}
 .register_bg {
   position: fixed;
   top: 80px;
@@ -8,6 +17,7 @@
   background-color: white;
   border-radius: 10px;
   border: 1px solid #448899;
+  z-index: 99;
 }
 
 .register_top {
@@ -34,12 +44,12 @@
 .login {
   display: none;
 }
-.login_input,
+.login_form > input,
+.register_form > input,
 .register_input {
   width: 85%;
   height: 25px;
   padding: 10px;
-  color: white;
   border-radius: 5px;
   border: 1px solid #448899;
   margin: 5px 0;
@@ -58,6 +68,18 @@
 
 .register {
   display: block;
+}
+
+.response_msg {
+  font-weight: bold;
+}
+
+.success_msg {
+  color: green;
+}
+
+.failure_msg {
+  color: red;
 }
 
 .point_text {

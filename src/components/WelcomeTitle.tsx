@@ -1,7 +1,7 @@
+import axios from "axios";
+import React, { useRef, useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import Category from "./Category";
-import axios from "axios";
-import React, { useState } from "react";
 
 interface WelcomeTitleProps {
   onCategorySelect: (category: string) => void;
@@ -11,6 +11,7 @@ const WelcomeTitle = ({ onCategorySelect }: WelcomeTitleProps) => {
   const [categories, setCategoies] = useState<string[]>([]);
   const [showCategory, setShowCategory] = useState<boolean>(false);
   const [inputValue, setInputValue] = useState<string>("");
+  const inputRef = useRef<HTMLInputElement>(null);
   const Server = import.meta.env.VITE_API_URL;
 
   const fetchCategories = async () => {
@@ -40,6 +41,10 @@ const WelcomeTitle = ({ onCategorySelect }: WelcomeTitleProps) => {
     }
   };
 
+  const handleClickOutside = () => {
+    setShowCategory(false);
+  };
+
   return (
     <div className="welcome_title display_flex">
       <header className="welcome_heading">輕鬆享受台北一日悠閒</header>
@@ -50,6 +55,7 @@ const WelcomeTitle = ({ onCategorySelect }: WelcomeTitleProps) => {
       >
         <input
           className="welcome_category_input"
+          ref={inputRef}
           autoFocus
           type="text"
           placeholder="輸入景點名稱查詢"
@@ -68,6 +74,7 @@ const WelcomeTitle = ({ onCategorySelect }: WelcomeTitleProps) => {
         categories={categories}
         show={showCategory}
         onClick={handleCategoryClick}
+        onClickOutside={handleClickOutside}
       />
     </div>
   );

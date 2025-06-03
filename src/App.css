@@ -48,7 +48,11 @@ body {
 }
 .navigator_links > div {
   margin: 15px;
-  cursor: pointer;
+}
+.username {
+  color: #448899;
+  font-size: 17px;
+  font-weight: bold;
 }
 
 .welcome {
