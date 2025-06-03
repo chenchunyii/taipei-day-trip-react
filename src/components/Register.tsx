@@ -21,6 +21,16 @@ const Register = ({ openRegister, setOpenRegister }: RegisterProps) => {
   const [thisUserEmail, setThisUserEmail] = useState("test@test.com");
   const [thisUserPassword, setThisUserPassword] = useState("Chun:123");
 
+  // Add effect to handle page reload after successful login
+  useEffect(() => {
+    if (isSuccess && successMessage === "登入成功") {
+      const timer = setTimeout(() => {
+        window.location.reload();
+      }, 1200);
+      return () => clearTimeout(timer);
+    }
+  }, [isSuccess, successMessage]);
+
   // Add event listener for Escape key
   useEffect(() => {
     const handleEscKey = (event: KeyboardEvent) => {
