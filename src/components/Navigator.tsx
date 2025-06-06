@@ -39,6 +39,15 @@ const Navigator = () => {
       });
   }, [Server]);
 
+  const handleLogout = () => {
+    document.cookie = "user=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    setMember(null);
+    setShowLogout(false);
+    setTimeout(() => {
+      window.location.reload();
+    }, 1000);
+  };
+
   return (
     <>
       <div className="navigator_bg">
@@ -60,7 +69,12 @@ const Navigator = () => {
                   >
                     {member.Nickname}
                     {showLogout && (
-                      <div className="logout cursor_pointer">登出</div>
+                      <div
+                        className="logout cursor_pointer"
+                        onClick={handleLogout}
+                      >
+                        登出
+                      </div>
                     )}
                   </span>
                   ，歡迎回來

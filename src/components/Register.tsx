@@ -19,7 +19,7 @@ const Register = ({ openRegister, setOpenRegister }: RegisterProps) => {
   const [thisRegistrantPassword, setThisRegistrantPassword] = useState("");
 
   const [thisUserEmail, setThisUserEmail] = useState("test@test.com");
-  const [thisUserPassword, setThisUserPassword] = useState("Chun:123");
+  const [thisUserPassword, setThisUserPassword] = useState("Test:123");
 
   // Add effect to handle page reload after successful login
   useEffect(() => {
