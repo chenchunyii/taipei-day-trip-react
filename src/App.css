@@ -18,7 +18,7 @@ body {
   height: 54px;
   width: 100%;
   background-color: #fff;
-  z-index: 99;
+  z-index: 9;
 }
 .navigator {
   max-width: 1280px;
@@ -48,7 +48,27 @@ body {
 }
 .navigator_links > div {
   margin: 15px;
-  cursor: pointer;
+}
+.username-container {
+  position: relative;
+}
+
+.username {
+  position: relative;
+  color: #448899;
+  font-size: 17px;
+  font-weight: bold;
+}
+.logout {
+  width: 40px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 100%;
+  background-color: white;
+  padding: 5px 10px;
+  border-radius: 4px;
+  z-index: 1000;
 }
 
 .welcome {
@@ -378,4 +398,7 @@ a {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.cursor_pointer {
+  cursor: pointer;
 }
