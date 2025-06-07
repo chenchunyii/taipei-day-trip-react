@@ -1,11 +1,12 @@
 import { useState } from "react";
-import "./App.css";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "../style/css/Register.css";
+import "./App.css";
+import AttractionPage from "./components/AttractionPage";
+import BookingPage from "./components/BookingPage";
 import Navigator from "./components/Navigator";
 import Promotion from "./components/Promotion";
 import Welcome from "./components/Welcome";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Attraction from "./components/Attraction";
 
 function App() {
   const [selectedCategory, setSelectedCategory] = useState<string>("");
@@ -23,7 +24,8 @@ function App() {
             </>
           }
         />
-        <Route path="/attraction/:id" element={<Attraction />} />
+        <Route path="/attraction/:id" element={<AttractionPage />} />
+        <Route path="/booking" element={<BookingPage />} />
       </Routes>
     </BrowserRouter>
   );
