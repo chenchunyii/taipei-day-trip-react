@@ -1,12 +1,11 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
+import { FcNext, FcPrevious } from "react-icons/fc";
+import { AttractionInterface } from "../interfaces/attraction";
 import Footer from "./Footer";
 import Navigator from "./Navigator";
-import { FcPrevious } from "react-icons/fc";
-import { FcNext } from "react-icons/fc";
-import axios from "axios";
-import { AttractionInterface } from "../interfaces/attraction";
 
-const Attraction = () => {
+const AttractionPage = () => {
   const Server = import.meta.env.VITE_API_URL;
   const [attraction, setAttraction] = useState<AttractionInterface>();
   const [selected, setSelected] = useState<"A" | "B">("A");
@@ -133,4 +132,4 @@ const Attraction = () => {
   );
 };
 
-export default Attraction;
+export default AttractionPage;
