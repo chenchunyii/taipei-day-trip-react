@@ -83,7 +83,7 @@ const Register = ({ openRegister, setOpenRegister }: RegisterProps) => {
         password: thisUserPassword,
       });
 
-      document.cookie = `user=${response.data.token};`;
+      document.cookie = `user=${response.data.token}; path=/;`;
 
       setShowRegister(false);
       setIsSuccess(true);
