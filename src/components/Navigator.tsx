@@ -1,47 +1,14 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
-import { MemberInterface } from "../interfaces/member";
+import { useState } from "react";
+import { useAuth } from "../hooks/useAuth";
 import Register from "./Register";
 
 const Navigator = () => {
-  const Server = import.meta.env.VITE_API_MEMBER_URL;
   const [openRegister, setOpenRegister] = useState(false);
-  const [member, setMember] = useState<MemberInterface | null>(null);
   const [showLogout, setShowLogout] = useState(false);
-
-  useEffect(() => {
-    const token = document.cookie.split("=")[1];
-
-    if (!token) return;
-    axios
-      .post(
-        `${Server}/me`,
-        {},
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
-      .then((res) => {
-        if (res.data) {
-          setMember({
-            Id: res.data.id,
-            Nickname: res.data.nickname,
-            Email: res.data.email,
-          });
-        }
-      })
-      .catch((err) => {
-        console.error("取得會員資料失敗：", err);
-
-        setMember(null);
-      });
-  }, [Server]);
+  const { member, logout } = useAuth();
 
   const handleLogout = () => {
-    document.cookie = "user=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-    setMember(null);
+    logout();
     setShowLogout(false);
     setTimeout(() => {
       window.location.reload();

@@ -1,6 +1,7 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { IoIosCloseCircle } from "react-icons/io";
+import { useAuth } from "../hooks/useAuth";
+import { validateLoginForm, validateRegisterForm } from "../utils/validation";
 
 interface RegisterProps {
   openRegister: boolean;
@@ -8,11 +9,9 @@ interface RegisterProps {
 }
 
 const Register = ({ openRegister, setOpenRegister }: RegisterProps) => {
-  const Server = import.meta.env.VITE_API_MEMBER_URL;
   const [showRegister, setShowRegister] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(Boolean);
-  const [successMessage, setSuccessMessage] = useState("");
-  const [failureMessage, setFailureMessage] = useState("");
+  const { register, login, isSuccess, successMessage, failureMessage } =
+    useAuth();
 
   const [thisRegistrantUsername, setThisRegistrantUsername] = useState("");
   const [thisRegistrantEmail, setThisRegistrantEmail] = useState("");
@@ -26,7 +25,7 @@ const Register = ({ openRegister, setOpenRegister }: RegisterProps) => {
     if (isSuccess && successMessage === "登入成功") {
       const timer = setTimeout(() => {
         window.location.reload();
-      }, 1200);
+      }, 1000);
       return () => clearTimeout(timer);
     }
   }, [isSuccess, successMessage]);
@@ -49,49 +48,45 @@ const Register = ({ openRegister, setOpenRegister }: RegisterProps) => {
   }, [openRegister, setOpenRegister]);
 
   // 註冊功能
-  const handleRegister = async (event: any) => {
+  const handleRegister = async (event: React.FormEvent) => {
     event.preventDefault();
 
-    try {
-      const response = await axios.post(`${Server}/signup`, {
-        userName: thisRegistrantUsername,
-        email: thisRegistrantEmail,
-        password: thisRegistrantPassword,
-      });
+    if (
+      !validateRegisterForm(
+        thisRegistrantUsername,
+        thisRegistrantEmail,
+        thisRegistrantPassword
+      )
+    ) {
+      return;
+    }
 
-      if (response.data && response.data.token) {
-        document.cookie = `user=${response.data.token};`;
+    await register({
+      userName: thisRegistrantUsername,
+      email: thisRegistrantEmail,
+      password: thisRegistrantPassword,
+    });
 
-        setShowRegister(false);
-        setIsSuccess(true);
-        setSuccessMessage(response.data.message);
-      } else {
-        setIsSuccess(false);
-        setFailureMessage("註冊失敗");
-      }
-    } catch (err) {
-      console.error("註冊失敗：", err);
+    if (isSuccess) {
+      setShowRegister(false);
     }
   };
+
   // 登入功能
-  const handleLogin = async (event: any) => {
+  const handleLogin = async (event: React.FormEvent) => {
     event.preventDefault();
 
-    try {
-      const response = await axios.post(`${Server}/login`, {
-        email: thisUserEmail,
-        password: thisUserPassword,
-      });
+    if (!validateLoginForm(thisUserEmail, thisUserPassword)) {
+      return;
+    }
 
-      document.cookie = `user=${response.data.token}; path=/;`;
+    await login({
+      email: thisUserEmail,
+      password: thisUserPassword,
+    });
 
+    if (isSuccess) {
       setShowRegister(false);
-      setIsSuccess(true);
-      setSuccessMessage(response.data.message);
-    } catch (err) {
-      setIsSuccess(false);
-      setFailureMessage("登入失敗");
-      console.error("登入失敗：", err);
     }
   };
 
