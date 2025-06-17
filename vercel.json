@@ -1,7 +1,7 @@
 {
   "rewrites": [
     {
-      "source": "/attraction/:id",
+      "source": "/(.*)",
       "destination": "/"
     }
   ]
