@@ -326,6 +326,76 @@ body {
   margin: 0 auto;
 }
 
+.booking_page_container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.bp_header {
+  text-align: left;
+  width: 50%;
+  font-size: 19px;
+  font-weight: bold;
+  color: rgb(102, 102, 102);
+}
+.bp_info_container {
+  display: flex;
+  justify-content: space-between;
+}
+.bp_info_img_container {
+  width: 260px;
+  height: 200px;
+  overflow: hidden;
+}
+.bp_info_img {
+  width: 100%;
+}
+.bp_info {
+  text-align: left;
+  width: 40%;
+  color: rgb(102, 102, 102);
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.bp_user_info_form {
+  display: flex;
+  flex-direction: column;
+  height: 200px;
+}
+.bp_ur_info {
+  flex: 1;
+  text-align: left;
+  color: rgb(102, 102, 102);
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+}
+.bp_input {
+  height: 22px;
+}
+.bp_info_content {
+  font-weight: lighter;
+}
+.bp_info_delete {
+  font-size: 20px;
+  width: 30%;
+  text-align: right;
+}
+.bp_info_att_name {
+  color: #448899;
+}
+.bp_bg {
+  margin: 0 auto;
+  width: 95%;
+  border-bottom: rgb(232, 232, 232) solid 3px;
+  padding: 40px 0;
+}
+.bp_container {
+  width: 90%;
+  margin: 0 auto;
+}
+
 .footer {
   position: absolute;
   bottom: 0;

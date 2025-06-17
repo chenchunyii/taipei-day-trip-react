@@ -23,7 +23,12 @@ const Navigator = () => {
             台北一日遊
           </a>
           <div className="navigator_links">
-            <div className="navigator_book cursor_pointer">預定行程</div>
+            <div
+              className="navigator_book cursor_pointer"
+              onClick={() => (window.location.href = "/booking")}
+            >
+              預定行程
+            </div>
 
             <div>
               {member ? (

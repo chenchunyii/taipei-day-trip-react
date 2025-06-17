@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { FcNext, FcPrevious } from "react-icons/fc";
+import { useAuth } from "../hooks/useAuth";
 import { AttractionInterface } from "../interfaces/attraction";
 import Footer from "./Footer";
 import Navigator from "./Navigator";
@@ -9,10 +10,41 @@ const AttractionPage = () => {
   const Server = import.meta.env.VITE_API_URL;
   const [attraction, setAttraction] = useState<AttractionInterface>();
   const [selected, setSelected] = useState<"A" | "B">("A");
-  const [fee, setFee] = useState<number>(2000);
+  const [amount, setAmount] = useState<number>(2000);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
+  const [bookingDate, setBookingDate] = useState<string>("");
   const images = attraction?.images || [];
   const totalImages = images.length;
+  const { member } = useAuth();
+
+  const handleCreateBooking = async () => {
+    try {
+      if (!bookingDate) {
+        alert("請選擇日期");
+        return;
+      }
+
+      if (!member?.Id) {
+        alert("請先登入");
+        return;
+      }
+
+      const bookingData = {
+        userId: member.Id,
+        attractionId: attraction?.id,
+        bookingDate: bookingDate,
+        dayPeriod: selected === "A" ? "am" : "pm",
+        amount,
+      };
+
+      await axios.post(`${Server}/attraction/booking`, bookingData);
+      window.location.href = "/booking";
+      // Redirect to booking page or show success message
+    } catch (error) {
+      console.error("Error creating booking:", error);
+      alert("預約失敗，請稍後再試");
+    }
+  };
 
   const handleNextImage = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % totalImages);
@@ -23,9 +55,9 @@ const AttractionPage = () => {
   const handleButtonClick = (buttonId: "A" | "B") => {
     setSelected(buttonId);
     if (buttonId === "A") {
-      setFee(2000);
+      setAmount(2000);
     } else if (buttonId === "B") {
-      setFee(2500);
+      setAmount(2500);
     }
   };
   const isSelected = (buttonId: "A" | "B") => {
@@ -97,7 +129,13 @@ const AttractionPage = () => {
             <p>訂購導覽行程</p>
             <p>以此景點為中心的一日行程，帶您探索城市角落故事</p>
             <p>
-              選擇日期：<input placeholder="yyyy/mm/dd" type="date"></input>
+              選擇日期：
+              <input
+                placeholder="yyyy/mm/dd"
+                type="date"
+                value={bookingDate}
+                onChange={(e) => setBookingDate(e.target.value)}
+              ></input>
             </p>
             <div className="display_flex">
               選擇時間：
@@ -112,9 +150,17 @@ const AttractionPage = () => {
               />
               <span>下半天</span>
             </div>
-            <p>導覽費用：新台幣 ${fee}元</p>
-            <form className="booking_form">
-              <button className="booking_btn">開始預定行程</button>
+            <p>導覽費用：新台幣 ${amount}元</p>
+            <form
+              className="booking_form"
+              onSubmit={(e) => {
+                e.preventDefault();
+                handleCreateBooking();
+              }}
+            >
+              <button type="submit" className="booking_btn">
+                開始預定行程
+              </button>
             </form>
           </div>
         </div>
