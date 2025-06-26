@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
+import { useAuth } from "../hooks/useAuth";
 
 const appId = import.meta.env.VITE_API_TAPPAY_APP_ID;
 const appKey = import.meta.env.VITE_API_TAPPAY_APP_KEY;
@@ -18,6 +19,7 @@ const TapPayForm: React.FC<PaymentFormProps> = ({ amount, contactInfo }) => {
   const cardNumberRef = useRef<HTMLDivElement>(null);
   const expiryDateRef = useRef<HTMLDivElement>(null);
   const ccvRef = useRef<HTMLDivElement>(null);
+  const { member } = useAuth(); // 假設 useAuth 提供會員資訊
 
   // 新增：追蹤是否已經初始化
   const isInitializedRef = useRef<boolean>(false);
@@ -143,6 +145,8 @@ const TapPayForm: React.FC<PaymentFormProps> = ({ amount, contactInfo }) => {
                 name: contactInfo.name,
                 email: contactInfo.email,
               },
+              userId: member?.Id,
+              accountEmail: member?.Email,
             });
             if (data.status === 200) {
               window.location.href = `/thanks?number=${data.data.orderNumber}`;
