@@ -1,15 +1,35 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { FaRegTrashCan } from "react-icons/fa6";
 import { useAuth } from "../hooks/useAuth";
 import { BookingInfo } from "../interfaces/booking";
 import Footer from "./Footer";
 import Navigator from "./Navigator";
+import TapPayForm from "./TapPayForm";
 
 const BookingPage = () => {
   const [bookingData, setBookingData] = useState<BookingInfo | null>(null);
   const { member } = useAuth();
   const Server = import.meta.env.VITE_API_URL;
+  const [contactInfo, setContactInfo] = useState({
+    name: "",
+    email: "",
+    phone: "",
+  });
+
+  const handleContactInfoChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setContactInfo((prevState) => ({
+      ...prevState,
+      [name === "contactName"
+        ? "name"
+        : name === "contactEmail"
+        ? "email"
+        : name === "contactPhone"
+        ? "phone"
+        : name]: value,
+    }));
+  };
 
   useEffect(() => {
     const fetchBookingData = async () => {
@@ -121,6 +141,7 @@ const BookingPage = () => {
                       name="contactName"
                       className="bp_input"
                       placeholder="請輸入姓名"
+                      onChange={handleContactInfoChange}
                     />
                   </div>
                   <div className="bp_ur_info">
@@ -130,6 +151,7 @@ const BookingPage = () => {
                       name="contactEmail"
                       className="bp_input"
                       placeholder="請輸入電子信箱"
+                      onChange={handleContactInfoChange}
                     />
                   </div>
                   <div className="bp_ur_info">
@@ -139,6 +161,7 @@ const BookingPage = () => {
                       name="contactPhone"
                       className="bp_input"
                       placeholder="請輸入手機號碼"
+                      onChange={handleContactInfoChange}
                     />
                   </div>
                   <div className="bp_ur_info">
@@ -150,6 +173,12 @@ const BookingPage = () => {
             <div className="bp_bg bp_credit_card_info">
               <div className="bp_container">
                 <h3 className="bp_header">信用卡付款資訊</h3>
+                <div className="bp_user_info_form">
+                  <TapPayForm
+                    amount={bookingData?.amount}
+                    contactInfo={contactInfo}
+                  />
+                </div>
               </div>
             </div>
           </>
