@@ -132,7 +132,6 @@ const TapPayForm: React.FC<PaymentFormProps> = ({ amount, contactInfo }) => {
       // 呼叫 TapPay 取得 Prime
       window.TPDirect?.card.getPrime(async (result) => {
         if (result.status === 0) {
-          console.log("成功取得 Prime:", result.card?.prime);
           if (result.card?.prime) {
             // // Pass the prime to the parent component for payment processing
             // onPrimeReceived(result.card.prime);
