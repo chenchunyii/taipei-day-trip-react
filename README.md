@@ -1,54 +1,59 @@
-# React + TypeScript + Vite
+# ~[Taipei-Day-Trip](https://taipei-day-trip-react-h281.vercel.app/)~
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+*"Taipei-Day-Trip" is a e-commerce tourism website that offers unique Taipei attractions, allowing customers to search for their preferences and book a one-day travel itinerary in Taipei."*
 
-Currently, two official plugins are available:
+## 🛒 E-Commerce Frontend
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This is the **React-based frontend** for an e-commerce platform, designed with modern UI/UX practices and powered by backend microservices built with .NET and MySQL.
 
-## Expanding the ESLint configuration
+## 🔧 Core Technologies & Frontend Features
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **Framework**: React
+- **Deployment**: Vercel
+- **UI Features**:
+  - Infinite Scroll: Products load seamlessly as you scroll down, providing a continuous Browse experience.
+  - Image Carousel: An interactive display for showcasing rich images of selected attractions.
+  - Full-Text Search: Allows you to quickly and accurately find attractions based on keywords.
+  - Third-Party Payment System: [TapPay](https://www.tappaysdk.com/taiwan-zhtw)
+- **Authentication**:
+  - Utilizes JWT (JSON Web Tokens) for handling user login and information security.
+  - User Tokens are stored in browser cookies. All authenticated frontend requests automatically carry this token, which the backend is responsible for decoding and validating to ensure data security and accuracy.
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## 🌐 Backend API Service Integration
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+- `/api/auth`: Handles user login, registration, and fetching member profiles.
+- `/api/attraction`: Manages attraction listings, booking services, and payment processing.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 📦 Demo
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+Here is website link => ~<https://taipei-day-trip-react-h281.vercel.app/>~
+
+Test account:
+- User : `test1@test.com`
+- Password : `Test:123`
+
+Test payment information:
+- Credit Card : `4242-4242-4242-4242`
+- Date : `12/34`
+- CVV : `123`
+
+## Features
+
+- Infinite Scroll
+
+- Rwd
+
+- Full-Text Search
+
+- Image Carousel
+
+- Booking
+
+- Third-Party Payment System
+
+## Version Control
+- Git / GitHub
+
+## Contact
+- Author: `Chen, Chun-Yi`
+- Email: `chun.yii.chen@gmail.com`
