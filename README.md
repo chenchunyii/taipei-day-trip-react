@@ -1,4 +1,4 @@
-![Infinite_Scroll-700x465](https://github.com/user-attachments/assets/b1b29c6b-37b0-4e5e-a095-0069e460267b)# [Taipei-Day-Trip](https://taipei-day-trip-react-h281.vercel.app/)
+# [Taipei-Day-Trip](https://taipei-day-trip-react-h281.vercel.app/)
 
 *"Taipei-Day-Trip" is a e-commerce tourism website that offers unique Taipei attractions, allowing customers to search for their preferences and book a one-day travel itinerary in Taipei."*
 
