@@ -1,4 +1,4 @@
-# ~[Taipei-Day-Trip](https://taipei-day-trip-react-h281.vercel.app/)~
+# [Taipei-Day-Trip](https://taipei-day-trip-react-h281.vercel.app/)
 
 *"Taipei-Day-Trip" is a e-commerce tourism website that offers unique Taipei attractions, allowing customers to search for their preferences and book a one-day travel itinerary in Taipei."*
 
@@ -26,7 +26,7 @@ This is the **React-based frontend** for an e-commerce platform, designed with m
 
 ## 📦 Demo
 
-Here is website link => ~<https://taipei-day-trip-react-h281.vercel.app/>~
+Here is website link => <https://taipei-day-trip-react-h281.vercel.app/>
 
 Test account:
 - User : `test1@test.com`
